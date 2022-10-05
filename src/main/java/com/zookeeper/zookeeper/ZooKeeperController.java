@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,15 +29,16 @@ public class ZooKeeperController {
         return newAnimal;
     }
 
-    @PatchMapping("/animals")
-    public ZooAnimal updateAnimal(@RequestBody ZooAnimal animal) {
+    @PatchMapping("/animals/{id}")
+    public ZooAnimal updateAnimal(@RequestBody ZooAnimal animal, @PathVariable int id) {
         ZooAnimal updatedAnimal = zooAnimalRepository.save(animal);
         return updatedAnimal;
     }
 
-    @DeleteMapping("/animals")
-    public void deleteAnimal(@RequestBody ZooAnimal animal) {
-        zooAnimalRepository.delete(animal);
+    @DeleteMapping("/animals/{id}")
+    public String deleteAnimal(@PathVariable int id) {
+        zooAnimalRepository.deleteById(id);
+        return ("Deleted animal with id: " + id);
     }
 
     @GetMapping("/animals/{id}")

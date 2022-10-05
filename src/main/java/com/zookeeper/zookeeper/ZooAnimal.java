@@ -7,16 +7,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "zoo_animals")
+@Table(name = "animals")
 public class ZooAnimal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
-    String name;
-    String species;
-    String origin;
-    Boolean isHungry;
+    public int id;
+
+    public String name;
+    public String species;
+    public String origin;
+    public Boolean isHungry;
 
     public ZooAnimal() {
     }
